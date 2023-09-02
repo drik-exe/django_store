@@ -4,8 +4,26 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'products/index.html')
+    context = {
+        'title': 'Store',
+
+    }
+    return render(request, 'products/index.html', context)
 
 
 def products(request):
-    return render(request, 'products/products.html')
+    context = {
+        'title': 'Store',
+        'products': [
+            {
+                'name': 'Product 1',
+                'price': 100
+            },
+            {
+                'name': 'Product 2', 'price':200
+            },
+
+        ]
+    }
+
+    return render(request, 'products/products.html', context)
