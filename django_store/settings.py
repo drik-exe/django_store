@@ -26,6 +26,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+DOMAIN_NAME = 'http://localhost:8000'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -132,5 +134,10 @@ LOGOUT_REDIRECT_URL = 'index'
 
 # Sending emails
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = '27danik98@gmail.com'
+EMAIL_HOST_PASSWORD = 'viqjegoqpjeeohdz'
 

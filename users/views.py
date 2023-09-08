@@ -1,9 +1,12 @@
 from django.contrib import auth
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
-from django.urls import  reverse_lazy
-from users.models import User
+from django.urls import reverse_lazy, reverse
+from django.views.generic import TemplateView
+
+from users.models import User, EmailVerification
 from users.forms import UserLoginForm, UserRegistrationForm, UserProfileForm
 from products.models import Basket
 from django.views.generic.edit import CreateView, UpdateView
@@ -40,70 +43,29 @@ class UserProfileView(TitleMixin, UpdateView):
         context['baskets'] = Basket.objects.filter(user=self.request.user)
         return context
 
+
+class EmailVerificationView(TitleMixin, TemplateView):
+    title = 'Store - Подтверждение электронной почты'
+    template_name = 'users/email_verification.html'
+
+    def get(self, request, *args, **kwargs):
+        code = kwargs['code']
+        user = User.objects.get(email=kwargs['email'])
+        email_verifications = EmailVerification.objects.filter(user=user, code=code)
+        if email_verifications.exists() and not email_verifications.first().is_expired():
+            user.is_verified_email = True
+            user.save()
+            return super(EmailVerificationView, self).get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('index'))
+
+
+
+
+
 def logout(request):
     auth.logout(request)
     return redirect('index')
 
-
-# @login_required
-# def profile(request):
-#     if request.method == 'POST':
-#         form = UserProfileForm(data=request.POST, instance=request.user, files=request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('users:profile')
-#         else:
-#             print(form.errors)
-#     else:
-#         form = UserProfileForm(instance=request.user)
-#
-#     baskets = Basket.objects.filter(user=request.user)
-#
-#     context = {
-#         'title': 'Store - Profile',
-#         'form': form,
-#         'baskets': baskets,
-#
-#     }
-#     return render(request, 'users/profile.html', context)
-
-
-# def registration(request):
-#
-#     if request.method == 'POST':
-#         form = UserRegistrationForm(data=request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Поздравляем, вы зарегестрировались')
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password2']
-#             user = auth.authenticate(username=username, password=password)
-#             auth.login(request, user)
-#             return redirect('index')
-#     else:
-#         form = UserRegistrationForm()
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, 'users/registration.html', context)
-
-
-# def login(request):
-#     if request.method == 'POST':
-#         form = UserLoginForm(data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data['username']
-#             password = form.cleaned_data['password']
-#             user = auth.authenticate(username=username, password=password)
-#             if user is not None:
-#                 auth.login(request, user)
-#                 return redirect('index')
-#     else:
-#         form = UserLoginForm()
-#
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, 'users/login.html', context)
 
 
