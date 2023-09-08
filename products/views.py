@@ -1,9 +1,11 @@
-from django.http import HttpResponseRedirect
-from products.models import Product, ProductCategory, Basket
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+
 from common.views import TitleMixin
+from products.models import Basket, Product, ProductCategory
+
 
 class IndexView(TitleMixin, TemplateView):
     template_name = 'products/index.html'
