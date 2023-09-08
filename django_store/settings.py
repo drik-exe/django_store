@@ -133,3 +133,4 @@ LOGOUT_REDIRECT_URL = 'index'
 # Sending emails
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
