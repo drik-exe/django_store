@@ -23,7 +23,7 @@ class ProductsListView(TitleMixin, ListView):
     def get_queryset(self):
         queryset = super(ProductsListView, self).get_queryset()
         category_id = self.kwargs.get('category_id')
-        return queryset.filter(category_id=category_id).order_by('id') if category_id else queryset
+        return queryset.filter(category_id=category_id) if category_id else queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(ProductsListView, self).get_context_data()
