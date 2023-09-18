@@ -1,17 +1,17 @@
 import stripe
-
-from django.http import HttpResponseRedirect, HttpResponse
+from django.conf import settings
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.base import TemplateView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
-from django.urls import reverse_lazy, reverse
-from django.conf import settings
-from django.views.generic.base import TemplateView
 
 from common.views import TitleMixin
 from orders.forms import OrderForm
-from products.models import Basket
 from orders.models import Order
+from products.models import Basket
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -23,6 +23,16 @@ class SuccessTemplateView(TitleMixin, TemplateView):
 
 class CanceledTemplateView(TitleMixin, TemplateView):
     template_name = 'orders/cancel.html'
+
+
+class OrderDetailView(DetailView):
+    template_name = 'orders/order.html'
+    model = Order
+
+    def get_context_data(self, **kwargs):
+        context = super(OrderDetailView, self).get_context_data(**kwargs)
+        context['title'] = f'Store - Заказ #{self.object.id}'
+        return context
 
 
 class OrderListView(TitleMixin, ListView):
