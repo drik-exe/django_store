@@ -40,3 +40,7 @@ All actions should be executed from the source directory of the project and only
    ```bash
    celery -A django_store worker --loglevel=INFO
    ```
+6. Run Stripe:
+   ```bash
+   stripe listen --forward-to 127.0.0.1:8000/webhook/stripe/
+   ```
