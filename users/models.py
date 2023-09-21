@@ -27,10 +27,10 @@ class EmailVerification(models.Model):
         message = f'Для подтверждения записи для {self.user.email} перейдите по ссылке {verification_link}'
 
         send_mail(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            [self.user.email],
+            subject=subject,
+            message=message,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[self.user.email],
             fail_silently=False,
         )
 

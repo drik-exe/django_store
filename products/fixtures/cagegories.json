@@ -1,0 +1,42 @@
+[
+  {
+    "model": "products.productcategory",
+    "pk": 6,
+    "fields": {
+      "name": "Новые",
+      "description": "Новые телефоны"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 7,
+    "fields": {
+      "name": "Бюджетные",
+      "description": "Дешевые телефоны"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 8,
+    "fields": {
+      "name": "Игровые",
+      "description": "Телефоны для игр"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 9,
+    "fields": {
+      "name": "Премиум",
+      "description": "Премием сегмент"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 10,
+    "fields": {
+      "name": "Складные",
+      "description": "Складные телефоны"
+    }
+  }
+]

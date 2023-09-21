@@ -1,0 +1,249 @@
+[
+  {
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+      "name": "Смартфон Apple iPhone 14 128GB",
+      "description": "Apple iOS, экран 6.1\" OLED (1170x2532) 60 Гц, Apple A15 Bionic, ОЗУ 6 ГБ, память 128 ГБ, камера 12 Мп, 1 SIM (nano-SIM/eSIM), влагозащита IP68",
+      "price": "2699.00",
+      "quantity": 20,
+      "image": "products_images/iphone_14.jpeg",
+      "stripe_product_price_id": "price_1NsQcPEPWGH48RhKuOT8Cgde",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+      "name": "Смартфон Apple iPhone 13 256GB",
+      "description": "Apple iOS, экран 6.1\" OLED (1170x2532) 60 Гц, Apple A15 Bionic, ОЗУ 4 ГБ, память 256 ГБ, камера 12 Мп, аккумулятор 3227 мАч, 1 SIM (nano-SIM/eSIM), влагозащита IP68",
+      "price": "2900.00",
+      "quantity": 15,
+      "image": "products_images/iphone_13.jpeg",
+      "stripe_product_price_id": "price_1NsQdyEPWGH48RhK1G0YBRox",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+      "name": "Смартфон Apple iPhone 14 Pro Max 128GB",
+      "description": "Apple iOS, экран 6.7\" OLED (1290x2796) 120 Гц, Apple A16 Bionic, ОЗУ 6 ГБ, память 128 ГБ, камера 48 Мп, аккумулятор 4323 мАч, 1 SIM (nano-SIM/eSIM), влагозащита IP68",
+      "price": "3899.00",
+      "quantity": 16,
+      "image": "products_images/iphone_14_pro_max.jpeg",
+      "stripe_product_price_id": "price_1NsQerEPWGH48RhKLYX0dSvG",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+      "name": "Смартфон Samsung Galaxy S23 SM-S911B/DS 8GB/256GB",
+      "description": "Android, экран 6.1\" AMOLED (1080x2340) 120 Гц, Qualcomm Snapdragon 8 Gen2 SM8550, ОЗУ 8 ГБ, память 256 ГБ, камера 50 Мп, аккумулятор 3900 мАч, 2 SIM (nano-SIM/eSIM), влагозащита IP68",
+      "price": "2549.00",
+      "quantity": 15,
+      "image": "products_images/samsung_galaxy_s23_IRj2Dmz.jpeg",
+      "stripe_product_price_id": "price_1NsQg3EPWGH48RhKxQ1dRHph",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+      "name": "Смартфон Samsung Galaxy S23 Ultra SM-S918B/DS 12GB/256GB",
+      "description": "Android, экран 6.8\" AMOLED (1440x3088) 120 Гц, Qualcomm Snapdragon 8 Gen2 SM8550, ОЗУ 12 ГБ, память 256 ГБ, камера 200 Мп, аккумулятор 5000 мАч, 2 SIM (nano-SIM/eSIM), влагозащита IP68",
+      "price": "3500.00",
+      "quantity": 19,
+      "image": "products_images/samsung_galaxy_s23_ultra.jpeg",
+      "stripe_product_price_id": "price_1NsQhDEPWGH48RhKymmQm958",
+      "category": 9
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+      "name": "Смартфон Samsung Galaxy Z Flip5 SM-F731B/DS 8GB/512GB",
+      "description": "Android, экран 6.7\" AMOLED (1080x2640) 120 Гц, Qualcomm Snapdragon 8 Gen2 SM8550, ОЗУ 8 ГБ, память 512 ГБ, камера 12 Мп, аккумулятор 3700 мАч, 1 SIM (nano-SIM/eSIM), влагозащита IPX8",
+      "price": "3459.00",
+      "quantity": 16,
+      "image": "products_images/samsung_galaxy_z_flip5.jpeg",
+      "stripe_product_price_id": "price_1NsQiEEPWGH48RhKzDQe2RL0",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+      "name": "Смартфон Samsung Galaxy Z Fold5 SM-F946B/DS 12GB/1TB",
+      "description": "Android, экран 7.6\" AMOLED (1812x2176) 120 Гц, Qualcomm Snapdragon 8 Gen2 SM8550, ОЗУ 12 ГБ, память 1 ТБ, камера 50 Мп, аккумулятор 4400 мАч, 2 SIM (nano-SIM/eSIM), влагозащита IPX8",
+      "price": "7350.00",
+      "quantity": 17,
+      "image": "products_images/samsung_galaxy_z_fold5.jpeg",
+      "stripe_product_price_id": "price_1NsQjzEPWGH48RhKAK3uZSpU",
+      "category": 10
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+      "name": "Смартфон Samsung Galaxy A10 2GB/32GB",
+      "description": "Android, экран 6.2\" TFT (720x1520), Exynos 7884, ОЗУ 2 ГБ, память 32 ГБ, поддержка карт памяти, камера 13 Мп, аккумулятор 3400 мАч, 2 SIM (nano-SIM)",
+      "price": "380.00",
+      "quantity": 24,
+      "image": "products_images/samsung_galaxy_a10.jpeg",
+      "stripe_product_price_id": "price_1NsQl0EPWGH48RhKGxUaWafY",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+      "name": "Смартфон Infinix Note 30 8GB/128GB",
+      "description": "Android, экран 6.78\" IPS (1080x2460) 120 Гц, Mediatek Helio G99, ОЗУ 8 ГБ, память 128 ГБ, поддержка карт памяти, камера 64 Мп, аккумулятор 5000 мАч, 2 SIM (nano-SIM), влагозащита IP53",
+      "price": "589.00",
+      "quantity": 14,
+      "image": "products_images/infinix_note_30.jpeg",
+      "stripe_product_price_id": "price_1NsQm6EPWGH48RhKtfW4epHv",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 17,
+    "fields": {
+      "name": "Смартфон Xiaomi Redmi 12 4GB/128GB без NFC международная версия",
+      "description": "Android, экран 6.79\" IPS (1080x2460) 90 Гц, Mediatek Helio G88, ОЗУ 4 ГБ, память 128 ГБ, поддержка карт памяти, камера 50 Мп, аккумулятор 5000 мАч, 2 SIM (nano-SIM), влагозащита IP53",
+      "price": "556.00",
+      "quantity": 19,
+      "image": "products_images/xiaomi_redmi_12.jpeg",
+      "stripe_product_price_id": "price_1NsQnAEPWGH48RhKfICs0OKI",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 18,
+    "fields": {
+      "name": "Смартфон Xiaomi Redmi 10C NFC 4GB/128GB международная версия",
+      "description": "Android, экран 6.71\" IPS (720x1650) 60 Гц, Qualcomm Snapdragon 680, ОЗУ 4 ГБ, память 128 ГБ, поддержка карт памяти, камера 50 Мп, аккумулятор 5000 мАч, 2 SIM (nano-SIM)",
+      "price": "450.00",
+      "quantity": 18,
+      "image": "products_images/xiaomi_redmi_10c_nfc.jpeg",
+      "stripe_product_price_id": "price_1NsQo5EPWGH48RhKyVRVxEL5",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 19,
+    "fields": {
+      "name": "Смартфон POCO M5 6GB/128GB международная версия",
+      "description": "Android, экран 6.58\" IPS (1080x2408) 90 Гц, Mediatek Helio G99, ОЗУ 6 ГБ, память 128 ГБ, поддержка карт памяти, камера 50 Мп, аккумулятор 5000 мАч, 2 SIM (nano-SIM)",
+      "price": "570.00",
+      "quantity": 17,
+      "image": "products_images/poco_m5.jpeg",
+      "stripe_product_price_id": "price_1NsQp6EPWGH48RhKUoCSNEH3",
+      "category": 7
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 20,
+    "fields": {
+      "name": "Смартфон HONOR 90 8GB/256GB международная версия",
+      "description": "Android, экран 6.7\" AMOLED (1200x2664) 120 Гц, Qualcomm Snapdragon 7 Gen 1 Accelerated Edition, ОЗУ 8 ГБ, память 256 ГБ, камера 200 Мп, аккумулятор 5000 мАч, 2 SIM (nano-SIM/eSIM)",
+      "price": "1450.00",
+      "quantity": 23,
+      "image": "products_images/honor_90.jpeg",
+      "stripe_product_price_id": "price_1NsQpzEPWGH48RhK9eZ7NDqf",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 21,
+    "fields": {
+      "name": "Смартфон Oppo Reno8 T CPH2481 8GB/128GB международная версия",
+      "description": "Android, экран 6.43\" AMOLED (1080x2400) 90 Гц, Mediatek Helio G99, ОЗУ 8 ГБ, память 128 ГБ, поддержка карт памяти, камера 100 Мп, аккумулятор 5000 мАч, 2 SIM (nano-SIM)",
+      "price": "848.00",
+      "quantity": 18,
+      "image": "products_images/oppo_reno8_t.jpeg",
+      "stripe_product_price_id": "price_1NsQrAEPWGH48RhKbo2ryHvg",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 22,
+    "fields": {
+      "name": "Смартфон Samsung Galaxy A54 5G SM-A546E/DS 8GB/256GB",
+      "description": "Android, экран 6.4\" AMOLED (1080x2340) 120 Гц, Exynos 1380, ОЗУ 8 ГБ, память 256 ГБ, поддержка карт памяти, камера 50 Мп, аккумулятор 5000 мАч, 2 SIM (nano-SIM), влагозащита IP67",
+      "price": "1385.00",
+      "quantity": 18,
+      "image": "products_images/samsung_galaxy_a54.jpeg",
+      "stripe_product_price_id": "price_1NsQs5EPWGH48RhKGFKxkNtb",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 23,
+    "fields": {
+      "name": "Смартфон POCO X5 Pro 5G 8GB/256GB международная версия",
+      "description": "Android, экран 6.67\" AMOLED (1080x2400) 120 Гц, Qualcomm Snapdragon 778G, ОЗУ 8 ГБ, память 256 ГБ, камера 108 Мп, аккумулятор 5000 мАч, 2 SIM (nano-SIM)",
+      "price": "1100.00",
+      "quantity": 22,
+      "image": "products_images/poco_x5_pro.jpeg",
+      "stripe_product_price_id": "price_1NsQtGEPWGH48RhKalfxVh1F",
+      "category": 6
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 24,
+    "fields": {
+      "name": "Смартфон Realme GT3 16GB/1TB международная версия",
+      "description": "Android, экран 6.74\" AMOLED (1240x2772) 144 Гц, Qualcomm Snapdragon 8+ Gen1, ОЗУ 16 ГБ, память 1 ТБ, камера 50 Мп, аккумулятор 4600 мАч, 2 SIM (nano-SIM)",
+      "price": "2300.00",
+      "quantity": 20,
+      "image": "products_images/realme_gt3.jpeg",
+      "stripe_product_price_id": "price_1NsQuAEPWGH48RhKItpKRqqW",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 25,
+    "fields": {
+      "name": "Смартфон Nubia RedMagic 8S Pro 16GB/512GB международная версия",
+      "description": "Android, экран 6.8\" AMOLED (1116x2480) 120 Гц, Qualcomm Snapdragon 8 Gen2 SM8550, ОЗУ 12 ГБ, память 256 ГБ, камера 50 Мп, аккумулятор 6000 мАч, 2 SIM (nano-SIM)",
+      "price": "3499.00",
+      "quantity": 21,
+      "image": "products_images/nubia_redmagic_8s_pro.jpeg",
+      "stripe_product_price_id": "price_1NsQvSEPWGH48RhKwcVybfwN",
+      "category": 8
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 26,
+    "fields": {
+      "name": "Смартфон ASUS ROG Phone 7 16GB/512GB международная версия",
+      "description": "Android, экран 6.78\" AMOLED (1080x2448) 165 Гц, Qualcomm Snapdragon 8 Gen2 SM8550, ОЗУ 16 ГБ, память 512 ГБ, камера 50 Мп, аккумулятор 6000 мАч, 2 SIM (nano-SIM), влагозащита IP54",
+      "price": "3050.00",
+      "quantity": 16,
+      "image": "products_images/asus_rog_phone_7.jpeg",
+      "stripe_product_price_id": "price_1NsQwIEPWGH48RhKkjwzhUJl",
+      "category": 8
+    }
+  }
+]
