@@ -220,6 +220,7 @@ EMAIL_USE_SSL = env('EMAIL_USE_SSL')
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 
+# redis-server --port 6380 --slaveof 127.0.0.1 6379
 
 # OAuth
 

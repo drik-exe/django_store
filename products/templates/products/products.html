@@ -13,6 +13,7 @@
 
     <div class="row">
 
+
         <div class="col-lg-3">
 {#category#}
             <h1 class="my-4">Phone Store</h1>
@@ -26,14 +27,22 @@
 {#    end category#}
         <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
 
+        <div class="col-lg-9">
+            <form action="{% url 'products:search' %}" method="get">
+                    <div class="input-group">
+                        <input name="q" type="text" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+            </form>
             <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
+
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                 </ol>
+
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
                         <img class="d-block img-fluid" src="/static/vendor/img/slides/iphone-1.jpg" alt="First slide">
@@ -92,7 +101,7 @@
             </li>
             {% for page in paginator.page_range %}
                 <li class="page-item {% if page_obj.number == page %} active {% endif %}">
-                    <a class="page-link" href="?page={{ page }}{% if category_id %}&category={{ category_id }}{% endif %}">{{ page }}</a>
+                    <a class="page-link" href="?page={{ page }}{% if category_id %}&category={{ category_id }}{% elif q %}&q={{ q }}{% endif %}">{{ page }}</a>
                 </li>
             {% endfor %}
             <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
