@@ -22,30 +22,22 @@ class ProductsListView(TitleMixin, ListView):
     ordering = ['quantity']
 
     def get_queryset(self):
-        queryset = super(ProductsListView, self).get_queryset()
+        queryset = super().get_queryset()
         category_id = self.kwargs.get('category_id')
-        return queryset.filter(category_id=category_id) if category_id else queryset
+        queryset = queryset.filter(category_id=category_id) if category_id else queryset
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ProductsListView, self).get_context_data()
-        context['categories'] = ProductCategory.objects.all()
-        return context
+        search_query = self.request.GET.get('q')
+        if search_query:
+            queryset = queryset.filter(name__icontains=search_query)
 
-
-class SearchListView(TitleMixin, ListView):
-    model = Product
-    template_name = 'products/products.html'
-    paginate_by = 3
-    title = 'Store - catalog'
-    ordering = ['quantity']
-
-    def get_queryset(self):
-        return Product.objects.filter(name__icontains=self.request.GET.get('q'))
+        return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['categories'] = ProductCategory.objects.all()
         context['q'] = self.request.GET.get('q')
         return context
+
 
 
 @login_required
