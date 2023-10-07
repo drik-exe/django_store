@@ -1,0 +1,45 @@
+{% extends 'products/base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block css %}
+	<link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-3">
+                <img src="{{ product_obj.image.url }}" alt="Product Image" class="img-fluid" width="250px" height="310px">
+            </div>
+            <div class="col-lg-6">
+                <h2>{{ product_obj.name }}</h2>
+                <p>{{ product_obj.description }}</p>
+                <a class="btn btn-outline-success" href="{% url 'products:basket_add' product_obj.pk %}">Отправить в корзину</a>
+            </div>
+        </div>
+    </div>
+    <br><br><br><br><br><br><br><br><br><br>
+{% endblock %}
+
+
+
+{% block footer %}
+	<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Follow me</p>
+    <div class="row">
+    <br/><br/>
+    <div class="col-md-12">
+        <p class="text-center">
+            <a href="https://github.com/drik-exe" target="_blank" class="btn-social btn-github"><i class="fa fa-github-alt"></i></a>
+            <a href="https://www.linkedin.com/in/daniil-drik-67687b210/" target="_blank" class="btn-social btn-linkedin"><i class="fa fa-linkedin"></i></a>
+        </p>
+
+    </div>
+    </div>
+</div>
+    </footer>
+{% endblock %}

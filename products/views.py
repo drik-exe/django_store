@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.http import HttpResponseRedirect
+from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
 
@@ -12,6 +13,12 @@ class IndexView(TitleMixin, TemplateView):
     template_name = 'products/index.html'
     title = 'Store'
 
+
+class ProductDetailView(DetailView):
+    template_name = 'products/product.html'
+    model = Product
+    context_object_name = 'product_obj'
+    pk_url_kwarg = 'product_id'
 
 
 class ProductsListView(TitleMixin, ListView):
