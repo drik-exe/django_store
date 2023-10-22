@@ -1,6 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
@@ -67,10 +68,19 @@ class EmailInputView(View):
         form_data = request.POST
         email = form_data.get('email')
 
-        User.objects.get(email=email)
-        expiration = now() + timedelta(hours=48)
-        record = PasswordReset.objects.create(code=uuid.uuid4(), expiration=expiration, email=email)
-        record.send_verification_email()
+        try:
+            user = User.objects.get(email=email)
+            if not user.is_verified_email:
+                raise PermissionDenied
+            expiration = now() + timedelta(hours=48)
+            record = PasswordReset.objects.create(code=uuid.uuid4(), expiration=expiration, email=email)
+            record.send_verification_email()
+        except ObjectDoesNotExist:
+            error_message = "Email не найден"
+            return render(request, 'users/email_input_form.html', {'error_message': error_message})
+        except:
+            error_message = "Email не подтвержден"
+            return render(request, 'users/email_input_form.html', {'error_message': error_message})
 
         return redirect('users:email_done')
 
