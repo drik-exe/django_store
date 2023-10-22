@@ -36,3 +36,27 @@ class EmailVerification(models.Model):
 
     def is_expired(self):
         return True if now() >= self.expiration else False
+
+
+class PasswordReset(models.Model):
+    code = models.UUIDField(unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    expiration = models.DateTimeField()
+    email = models.EmailField()
+
+    def send_verification_email(self):
+        link = reverse('users:reset_password', kwargs={'email': self.email, 'code': self.code})
+        verification_link = f'{settings.DOMAIN_NAME}{link}'
+        subject = f'Reset password'
+        message = f'For reset password for  {self.email} follow the link {verification_link}'
+
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.EMAIL_HOST_USER,
+            recipient_list=[self.email],
+            fail_silently=False,
+        )
+
+    def is_expired(self):
+        return True if now() >= self.expiration else False

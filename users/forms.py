@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import (AuthenticationForm, UserChangeForm,
                                        UserCreationForm)
+from django.core.validators import EmailValidator
 
 from users.models import EmailVerification, User
 from users.tasks import send_email_verification
@@ -56,6 +57,20 @@ class UserRegistrationForm(UserCreationForm):
         user = super(UserRegistrationForm, self).save(commit=True)
         send_email_verification.delay(user.id)
         return user
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        email_validator = EmailValidator()
+
+        try:
+            email_validator(email)
+        except forms.ValidationError:
+            raise forms.ValidationError('Неправильный email')
+
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('Email уже зарегестрирован')
+
+        return email
 
 
 class UserProfileForm(UserChangeForm):

@@ -2,14 +2,19 @@ from django.contrib import auth
 from django.contrib.auth.views import LoginView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse, reverse_lazy
+from django.views import View
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, UpdateView
+from django.utils.timezone import now
 
 from common.views import TitleMixin
 from users.forms import UserLoginForm, UserProfileForm, UserRegistrationForm
-from users.models import EmailVerification, User
+from users.models import EmailVerification, User, PasswordReset
+
+from datetime import timedelta
+import uuid
 
 
 class UserLoginView(TitleMixin, LoginView):
@@ -38,8 +43,6 @@ class UserProfileView(TitleMixin, UpdateView):
         return reverse_lazy('users:profile', args=(self.object.id,))
 
 
-
-
 class EmailVerificationView(TitleMixin, TemplateView):
     title = 'Store - Подтверждение электронной почты'
     template_name = 'users/email_verification.html'
@@ -56,12 +59,62 @@ class EmailVerificationView(TitleMixin, TemplateView):
             return HttpResponseRedirect(reverse('index'))
 
 
+class EmailInputView(View):
+    def get(self, request):
+        return render(request, 'users/email_input_form.html')
 
+    def post(self, request):
+        form_data = request.POST
+        email = form_data.get('email')
+
+        User.objects.get(email=email)
+        expiration = now() + timedelta(hours=48)
+        record = PasswordReset.objects.create(code=uuid.uuid4(), expiration=expiration, email=email)
+        record.send_verification_email()
+
+        return redirect('users:email_done')
+
+
+class PasswordResetView(TemplateView):
+    template_name = 'users/password_reset_form.html'
+
+    def get(self, request, *args, **kwargs):
+        code = kwargs['code']
+
+        email = kwargs['email']
+        email_verifications = PasswordReset.objects.filter(code=code, email=email)
+        if email_verifications.exists() and not email_verifications.first().is_expired():
+            return super(PasswordResetView, self).get(request, *args, **kwargs)
+        else:
+            return HttpResponseRedirect(reverse('index'))
+
+    def post(self, request, *args, **kwargs):
+        code = kwargs['code']
+        user_email = kwargs['email']
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+        email_verifications = PasswordReset.objects.filter(code=code, email=user_email)
+
+        if email_verifications.exists() and not email_verifications.first().is_expired():
+            user = User.objects.get(email=user_email)
+            if new_password == confirm_password:
+                user.set_password(new_password)
+                user.save()
+                return redirect('users:reset_complete')
+            else:
+                error_message = "Passwords do not match"
+                return render(request, self.template_name, {'error_message': error_message})
+        return HttpResponseRedirect(reverse('index'))
+
+
+def confirming_view(request):
+    return render(request, 'users/password_reset_done.html')
+
+
+def reset_complete_view(request):
+    return render(request, 'users/password_reset_complete.html')
 
 
 def logout(request):
     auth.logout(request)
     return redirect('index')
-
-
-
