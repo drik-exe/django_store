@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views.decorators.cache import cache_page
 
 from orders.views import *
 
@@ -11,5 +10,4 @@ urlpatterns = [
     path('order-canceled/', CanceledTemplateView.as_view(), name='order_canceled'),
     path('', OrderListView.as_view(), name='orders_list'),
     path('order/<int:pk>', OrderDetailView.as_view(), name='order'),
-
 ]

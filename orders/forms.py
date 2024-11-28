@@ -21,9 +21,6 @@ class OrderForm(forms.ModelForm):
         'placeholder': 'Беларусь, Минск, пр. Мира 16, дом Осло',
     }))
 
-
-
-
     class Meta:
         model = Order
         fields = ('first_name', 'last_name', 'address', 'email')

@@ -1,4 +1,3 @@
-import stripe
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
@@ -12,8 +11,6 @@ from common.views import TitleMixin
 from orders.forms import OrderForm
 from orders.models import Order
 from products.models import Basket
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class SuccessTemplateView(TitleMixin, TemplateView):
@@ -52,57 +49,30 @@ class OrderCreateView(TitleMixin, CreateView):
     success_url = reverse_lazy('orders:order_create')
     title = 'Store - оформление заказа'
 
-    def post(self, request, *args, **kwargs):
-        super(OrderCreateView, self).post(request, *args, **kwargs)
-        baskets = Basket.objects.filter(user=self.request.user)
-        checkout_session = stripe.checkout.Session.create(
-            line_items=baskets.stripe_products(),
-            metadata={'order_id': self.object.id},
-            mode='payment',
-            success_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_success')),
-            cancel_url='{}{}'.format(settings.DOMAIN_NAME, reverse('orders:order_canceled')),
-        )
-        return HttpResponseRedirect(checkout_session.url, status=303)
-
     def form_valid(self, form):
+        # Set the initiator of the order (the user making the order)
         form.instance.initiator = self.request.user
-        return super(OrderCreateView, self).form_valid(form)
+
+        # Save the order to the database
+        response = super(OrderCreateView, self).form_valid(form)
+
+        # Retrieve the user's basket
+        baskets = Basket.objects.filter(user=self.request.user)
+
+        # Save the basket details to the order
+        form.instance.basket_history = {
+            'purchased_items': [basket.de_json() for basket in baskets],
+            'total_sum': float(baskets.total_sum()),
+        }
+        form.instance.save()
+
+        # Delete items from the basket after order creation
+        baskets.delete()
+
+        return response
+
 
 
 @csrf_exempt
 def stripe_webhook_view(request):
-    payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    event = None
-
-    try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
-        )
-    except ValueError as e:
-        # Invalid payload
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        return HttpResponse(status=400)
-
-    # Handle the checkout.session.completed event
-    if event['type'] == 'checkout.session.completed':
-        # Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
-        session = stripe.checkout.Session.retrieve(
-            event['data']['object']['id'],
-            expand=['line_items'],
-        )
-
-        line_items = session
-        # Fulfill the purchase...
-        fulfill_order(line_items)
-
-    # Passed signature verification
     return HttpResponse(status=200)
-
-
-def fulfill_order(line_items):
-    order_id = int(line_items.metadata.order_id)
-    order = Order.objects.get(id=order_id)
-    order.update_after_payment()

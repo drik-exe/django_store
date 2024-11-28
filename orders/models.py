@@ -14,7 +14,6 @@ class Order(models.Model):
         (PAID, 'Оплачен'),
         (ON_WAY, 'В пути'),
         (DELIVERED, 'Доставлен'),
-
     )
 
     first_name = models.CharField(max_length=64)
