@@ -5,6 +5,25 @@
 
 {% block css %}
 	<link href="{% static 'vendor/css/products.css' %}" rel="stylesheet">
+
+    <style>
+        .pagination .page-link:focus {
+            box-shadow: none; /* Убирает синий обвод вокруг */
+            outline: none;    /* Убирает контур */
+            background-color: transparent; /* Оставляет прозрачный фон */
+            color: #000; /* Черный цвет текста по умолчанию */
+        }
+        .pagination .page-link {
+            color: #000; /* Черный цвет текста по умолчанию */
+        }
+        .pagination .page-item.active .page-link {
+            background-color: #21d49a; /* Зеленый цвет для активной страницы */
+            border-color: #87f1c0;
+        }
+        .pagination .page-item.disabled .page-link {
+            color: #ccc; /* Цвет для отключенных элементов */
+        }
+    </style>
 {% endblock %}
 
 
@@ -19,7 +38,7 @@
             <h1 class="my-4">Underpants Store</h1>
             <div class="list-group">
                 {% for category in categories %}
-                    <a href="{% url 'products:category' category.id %}" class="list-group-item">{{ category.name }}</a>
+                    <a href="{% url 'products:category' category.id %}" class="list-group-item text-dark">{{ category.name }}</a>
                 {% endfor %}
             </div>
 
@@ -33,7 +52,7 @@
             <form action="{% url 'products:search' %}" method="get">
                     <div class="input-group">
                         <input name="q" type="text" type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></button>
                     </div>
             </form>
             <br>
@@ -83,7 +102,7 @@
                         </a>
                         <div class="card-body">
                             <h4 class="card-title">
-                                <a href="{% url 'products:product' product.id %}">{{ product.name }}</a>
+                                <a class="text-dark" href="{% url 'products:product' product.id %}">{{ product.name }}</a>
                             </h4>
                             <h5>{{ product.price|intcomma }} руб.</h5>
                             <p class="card-text">{{ product.description }}</p>
@@ -101,7 +120,7 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
-                <a class="page-link"
+                <a class="page-link text-dark"
                    href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}{% if category_id %}&category={{ category_id }}{% endif %}{% else %}#{% endif %}"
                    tabindex="-1" aria-disabled="true">
                     <<
@@ -109,11 +128,11 @@
             </li>
             {% for page in paginator.page_range %}
                 <li class="page-item {% if page_obj.number == page %} active {% endif %}">
-                    <a class="page-link" href="?page={{ page }}{% if category_id %}&category={{ category_id }}{% elif q %}&q={{ q }}{% endif %}">{{ page }}</a>
+                    <a class="page-link text-dark" href="?page={{ page }}{% if category_id %}&category={{ category_id }}{% elif q %}&q={{ q }}{% endif %}">{{ page }}</a>
                 </li>
             {% endfor %}
             <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
-                <a class="page-link"
+                <a class="page-link text-dark"
                    href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}{% if category_id %}&category={{ category_id }}{% endif %}{% else %}#{% endif %}">
                     >>
                 </a>

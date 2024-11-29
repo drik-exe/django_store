@@ -21,7 +21,7 @@
                                 <div class="col-lg-4">{{ basket.sum|intcomma }} руб.</div>
                                 <div class="col-lg-4">
                                     <a href="{% url 'products:basket_remove' basket.id %}">
-                                        <i class="fas fa-trash"></i>
+                                        <i class="fas fa-trash text-dark"></i>
                                     </a>
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                         <h4 class="float-right">{{ baskets.total_sum|intcomma }} руб.</h4>
                     </div>
                 </div>
-    <a class="btn btn-success btn-lg float-right" href="{% url 'orders:order_create' %}">
+    <a class="btn btn-dark btn-lg float-right" href="{% url 'orders:order_create' %}">
                 Оформить заказ
             </a>
 {% else %}
