@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import DetailView
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
+from django.db.models import Q
 
 from common.views import TitleMixin
 from products.models import Basket, Product, ProductCategory
@@ -37,13 +38,26 @@ class ProductsListView(TitleMixin, ListView):
         if search_query:
             queryset = queryset.filter(name__icontains=search_query)
 
+        min_price = self.request.GET.get('min_price')
+        max_price = self.request.GET.get('max_price')
+        if min_price or max_price:
+            price_filter = Q()
+            if min_price:
+                price_filter &= Q(price__gte=min_price)
+            if max_price:
+                price_filter &= Q(price__lte=max_price)
+            queryset = queryset.filter(price_filter)
+
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = ProductCategory.objects.all()
         context['q'] = self.request.GET.get('q')
+        context['min_price'] = self.request.GET.get('min_price', '')
+        context['max_price'] = self.request.GET.get('max_price', '')
         return context
+
 
 
 

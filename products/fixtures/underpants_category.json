@@ -1,0 +1,42 @@
+[
+  {
+    "model": "products.productcategory",
+    "pk": 11,
+    "fields": {
+      "name": "Мужские",
+      "description": "Трусы для настоящих мужчин"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 12,
+    "fields": {
+      "name": "Женские",
+      "description": "Тресы для женщин"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 13,
+    "fields": {
+      "name": "Крутые",
+      "description": "Трусы крутые, просто бес оф зе бест"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 14,
+    "fields": {
+      "name": "Программерские",
+      "description": "Трусы для настоящих программистов"
+    }
+  },
+  {
+    "model": "products.productcategory",
+    "pk": 15,
+    "fields": {
+      "name": "Семейные",
+      "description": "Трусы семейные"
+    }
+  }
+]
