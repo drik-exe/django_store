@@ -48,6 +48,17 @@ class ProductsListView(TitleMixin, ListView):
                 price_filter &= Q(price__lte=max_price)
             queryset = queryset.filter(price_filter)
 
+        # New: Filter by quantity
+        min_quantity = self.request.GET.get('min_quantity')
+        max_quantity = self.request.GET.get('max_quantity')
+        if min_quantity or max_quantity:
+            quantity_filter = Q()
+            if min_quantity:
+                quantity_filter &= Q(quantity__gte=min_quantity)
+            if max_quantity:
+                quantity_filter &= Q(quantity__lte=max_quantity)
+            queryset = queryset.filter(quantity_filter)
+
         return queryset
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -56,7 +67,11 @@ class ProductsListView(TitleMixin, ListView):
         context['q'] = self.request.GET.get('q')
         context['min_price'] = self.request.GET.get('min_price', '')
         context['max_price'] = self.request.GET.get('max_price', '')
+        # Add min and max quantity to context
+        context['min_quantity'] = self.request.GET.get('min_quantity', '')
+        context['max_quantity'] = self.request.GET.get('max_quantity', '')
         return context
+
 
 
 
